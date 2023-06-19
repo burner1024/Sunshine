@@ -1413,9 +1413,9 @@ namespace video {
 
       std::optional<std::chrono::steady_clock::time_point> frame_timestamp;
 
-      // Encode at a minimum of 10 FPS to avoid image quality issues with static content
+      // Encode at a minimum of 60 FPS to avoid image quality issues with static content
       if (!frame->key_frame || images->peek()) {
-        if (auto img = images->pop(100ms)) {
+        if (auto img = images->pop(17ms)) {
           frame_timestamp = img->frame_timestamp;
           if (session->device->convert(*img)) {
             BOOST_LOG(error) << "Could not convert image"sv;
